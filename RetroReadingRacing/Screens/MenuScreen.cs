@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework.Media;
 using ParticleSystemExample;
 using RetroReadingRacing.StateManagement;
 using SharpDX.Direct2D1.Effects;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrayNotify;
 
 namespace RetroReadingRacing.Screens
 {
@@ -28,6 +29,8 @@ namespace RetroReadingRacing.Screens
         private Tilemap _quickPlay;
         private Car _car1;
         private Car _car2;
+
+        private Texture2D _title;
 
         private ExplosionParticleSystem _explosions;
 
@@ -57,6 +60,9 @@ namespace RetroReadingRacing.Screens
             _quickPlay = _content.Load<Tilemap>("quickplay");
             _car1 = new Car(_content.Load<Texture2D>("tiles"), new Vector2(310, 450), PlayerIndex.One);
             _car2 = new Car(_content.Load<Texture2D>("tiles"), new Vector2(340, 450), PlayerIndex.Two);
+
+            _title = _content.Load<Texture2D>("title");
+
             if (_isTwoPlayer) _car2.Exists = true;
 
             _explosions = new ExplosionParticleSystem(ScreenManager.Game, 100);
@@ -95,7 +101,7 @@ namespace RetroReadingRacing.Screens
                 car.speed -= 0.05f;
                 if (car.speed < 0)
                 {
-                    car.speed = 0; // Ensure speed doesn't go negative
+                    car.speed = 0;
                 }
             }
             if (car.speed < 0 && GamePad.GetState(car.PlayerNum).Triggers.Left == 0)
@@ -104,7 +110,7 @@ namespace RetroReadingRacing.Screens
                 car.speed += 0.05f;
                 if (car.speed > 0)
                 {
-                    car.speed = 0; // Ensure speed doesn't go positive (reverse)
+                    car.speed = 0;
                 }
             }
 
@@ -233,7 +239,6 @@ namespace RetroReadingRacing.Screens
             }
         }
 
-        // Responds to user input, changing the selected entry and accepting or cancelling the menu.
         public override void HandleInput(GameTime gameTime, InputState input)
         {
             UpdateCar(_car1, gameTime);
@@ -251,6 +256,10 @@ namespace RetroReadingRacing.Screens
             if (!_car2.Exists && GamePad.GetState(PlayerIndex.Two).Buttons.A > 0)
             {
                 _car2.Exists = true;
+            }
+            if (_car2.Exists && GamePad.GetState(PlayerIndex.Two).Buttons.B > 0)
+            {
+                _car2.Exists = false;
             }
         }
 
@@ -271,7 +280,8 @@ namespace RetroReadingRacing.Screens
             if (!trackSelection && !quickPlaySelection)
             {
                 _tilemap.Draw(gameTime, spriteBatch);
-                spriteBatch.DrawString(ScreenManager.BigFont, "Retro Reading Racing", new Vector2(80, 160), Color.Black);
+                //spriteBatch.DrawString(ScreenManager.BigFont, "Retro Reading Racing", new Vector2(80, 160), Color.Black);
+                spriteBatch.Draw(_title, new Vector2(320, 225), new Rectangle(0, 0, 128, 64), Color.White, 0, new Vector2(64, 64), 2.0f, SpriteEffects.None, 0);
                 spriteBatch.DrawString(ScreenManager.SmallFont, "Use a controller\nDon't fall off the map\nHave fun!", new Vector2(80, 496), Color.Black);
                 spriteBatch.DrawString(ScreenManager.SmallFont, "Made by Kyle Reading", new Vector2(384, 496), Color.Black);
             }
