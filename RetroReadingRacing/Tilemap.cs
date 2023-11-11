@@ -78,24 +78,45 @@ namespace RetroReadingRacing
                         else if (tile.ID == 28 || tile.ID == 29 || tile.ID == 33 || tile.ID == 34) tempResult = 4;
                         else if (tile.ID == 36 || tile.ID == 37 || tile.ID == 41 || tile.ID == 42) tempResult = 5;
                         else if (tile.ID == 38 || tile.ID == 39 || tile.ID == 43 || tile.ID == 44) tempResult = 6;
-                        else if (tile.ID == 10) tempResult = 1;
-                        switch (direction)
+                        else if (tile.ID == 46 || tile.ID == 47 || tile.ID == 51 || tile.ID == 52) tempResult = 7;
+                        else if (tile.ID == 48 || tile.ID == 49 || tile.ID == 53 || tile.ID == 54) tempResult = 11;
+                        else if (tile.ID == 56 || tile.ID == 57 || tile.ID == 61 || tile.ID == 62) tempResult = 12;
+                        //else if (tile.ID >= 6 && tile.ID <= 13) tempResult = 1;
+                        if (direction == CollisionDirection.CollisionTop || direction == CollisionDirection.CollisionBottom)
+                        {
+                            if (result > 7 && result <= 10)
+                            {
+                                result = 10;
+                            }
+                            else if (tempResult == 0) result = 8;
+                            else result = tempResult;
+                        }
+                        else if (direction == CollisionDirection.CollisionLeft || direction == CollisionDirection.CollisionRight)
+                        {
+                            if (result > 7 && result <= 10)
+                            {
+                                result = 10;
+                            }
+                            else if (tempResult == 0) result = 9;
+                            else result = tempResult;
+                        }
+                        /*switch (direction)
                         {
                             case CollisionDirection.CollisionTop:
-                                result = tempResult;
+                                result = 7;
                                 break;
                             case CollisionDirection.CollisionBottom:
-                                result = tempResult;
+                                result = 7;
                                 break;
                             case CollisionDirection.CollisionLeft:
-                                result = tempResult;
+                                result = 8;
                                 break;
                             case CollisionDirection.CollisionRight:
-                                result = tempResult;
+                                result = 8;
                                 break;
                             default:
                                 break;
-                        }
+                        }*/
                     }
                 }
             }

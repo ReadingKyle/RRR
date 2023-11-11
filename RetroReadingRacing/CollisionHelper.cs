@@ -13,7 +13,7 @@ namespace RetroReadingRacing
         CollisionTop,
         CollisionBottom,
         CollisionLeft,
-        CollisionRight,
+        CollisionRight
     }
     public static class CollisionHelper
     {
@@ -28,11 +28,27 @@ namespace RetroReadingRacing
             if (!(a.Right < b.Left || a.Left > b.Right ||
                     a.Top > b.Bottom || a.Bottom < b.Top))
             {
-                if (a.Right > b.Left) return CollisionDirection.CollisionLeft;
-                else if (a.Left < b.Right) return CollisionDirection.CollisionRight;
-                else if (a.Top < b.Bottom) return CollisionDirection.CollisionTop;
-                else if (a.Bottom > b.Top) return CollisionDirection.CollisionBottom;
-                else return CollisionDirection.NoCollision;
+                int topBottom = Math.Abs(a.Top - b.Bottom);
+                int bottomTop = Math.Abs(a.Bottom - b.Top);
+                int rightLeft = Math.Abs(a.Right - b.Left);
+                int leftRight = Math.Abs(a.Left - b.Right);
+
+                if (topBottom < bottomTop && topBottom < rightLeft && topBottom < leftRight)
+                {
+                    return CollisionDirection.CollisionTop;
+                }
+                else if (bottomTop < rightLeft && bottomTop < leftRight)
+                {
+                    return CollisionDirection.CollisionBottom;
+                }
+                else if (rightLeft < leftRight)
+                {
+                    return CollisionDirection.CollisionLeft;
+                }
+                else
+                {
+                    return CollisionDirection.CollisionRight;
+                }
             }
             else return CollisionDirection.NoCollision;
         }

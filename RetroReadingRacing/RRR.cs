@@ -35,7 +35,7 @@ namespace RetroReadingRacing
 
         private void AddInitialScreens()
         {
-            _screenManager.AddScreen(new MenuScreen());
+            _screenManager.AddScreen(new MenuScreen(false));
             _screenManager.AddScreen(new SplashScreen());
         }
 

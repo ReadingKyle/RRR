@@ -57,10 +57,27 @@
 /processorParam:TextureFormat=Color
 /build:bomb_explosion.png
 
-#begin map.txt
+#begin darkscreen.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:darkscreen.png
+
+#begin example.txt
 /importer:
 /processor:
-/build:map.txt
+/build:example.txt
+
+#begin menu.txt
+/importer:
+/processor:
+/build:menu.txt
 
 #begin november.spritefont
 /importer:FontDescriptionImporter
@@ -68,6 +85,11 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:november.spritefont
+
+#begin quickplay.txt
+/importer:
+/processor:
+/build:quickplay.txt
 
 #begin ready-set-drift-michael-grubb-main-version-24555-02-59.mp3
 /importer:Mp3Importer
@@ -130,22 +152,15 @@
 /processorParam:TextureFormat=Color
 /build:tiles.png
 
-#begin tiles.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:tiles.png
-
 #begin track1.txt
 /importer:
 /processor:
 /build:track1.txt
+
+#begin track10.txt
+/importer:
+/processor:
+/build:track10.txt
 
 #begin track2.txt
 /importer:
@@ -162,8 +177,52 @@
 /processor:
 /build:track4.txt
 
+#begin track5.txt
+/importer:
+/processor:
+/build:track5.txt
+
+#begin track6.txt
+/importer:
+/processor:
+/build:track6.txt
+
+#begin track7.txt
+/importer:
+/processor:
+/build:track7.txt
+
+#begin track8.txt
+/importer:
+/processor:
+/build:track8.txt
+
+#begin track9.txt
+/importer:
+/processor:
+/build:track9.txt
+
 #begin trackselect.txt
 /importer:
 /processor:
 /build:trackselect.txt
+
+#begin trophy.fbx
+/importer:FbxImporter
+/processor:ModelProcessor
+/processorParam:ColorKeyColor=0,0,0,0
+/processorParam:ColorKeyEnabled=True
+/processorParam:DefaultEffect=BasicEffect
+/processorParam:GenerateMipmaps=True
+/processorParam:GenerateTangentFrames=False
+/processorParam:PremultiplyTextureAlpha=True
+/processorParam:PremultiplyVertexColors=True
+/processorParam:ResizeTexturesToPowerOfTwo=False
+/processorParam:RotationX=0
+/processorParam:RotationY=0
+/processorParam:RotationZ=0
+/processorParam:Scale=1
+/processorParam:SwapWindingOrder=False
+/processorParam:TextureFormat=Compressed
+/build:trophy.fbx
 

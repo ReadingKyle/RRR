@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using PipelineExtension;
 using SharpDX.Direct2D1.Effects;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace RetroReadingRacing
 {
     public class Car
     {
+        public CollisionDirection LastCollision;
         private Texture2D _texture;
         public Vector2 Position;
         public Vector2 PreviousPosition;
@@ -25,11 +27,28 @@ namespace RetroReadingRacing
 
         public Rectangle HitBox;
 
-        public Car(Texture2D texture, Vector2 position)
+        public PlayerIndex PlayerNum;
+
+        public bool isColliding;
+
+        public Vector2 InitialPosition;
+
+        public bool Exists;
+
+        public bool checkpoint1;
+        public bool checkpoint2;
+        public bool checkpoint3;
+
+        public int NumLaps;
+
+        public Car(Texture2D texture, Vector2 position, PlayerIndex playerNum)
         {
             _texture = texture;
             Position = position;
-            HitBox = new Rectangle((int)Position.X-12, (int)Position.Y-12, 16, 16);
+            HitBox = new Rectangle((int)Position.X-11, (int)Position.Y-8, 16, 16);
+            PlayerNum = playerNum;
+            InitialPosition = Position;
+            NumLaps = 0;
         }
 
         public void Update(GameTime gameTime)
@@ -37,6 +56,10 @@ namespace RetroReadingRacing
             if (angularSpeed != 0 && speed != 0)
             {
                 rotation += angularSpeed * _turnSpeed;
+                if (rotation > MathHelper.TwoPi)
+                {
+                    rotation -= MathHelper.TwoPi;
+                }
             }
             else
             {
@@ -49,8 +72,8 @@ namespace RetroReadingRacing
 
             Position.X += speed * (float)Math.Sin(rotation);
             Position.Y += -speed * (float)Math.Cos(rotation);
-            HitBox.X = (int)Position.X - 12;
-            HitBox.Y = (int)Position.Y - 12;
+            HitBox.X = (int)Position.X - 8;
+            HitBox.Y = (int)Position.Y - 8;
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -58,14 +81,15 @@ namespace RetroReadingRacing
             spriteBatch.Draw(
                 _texture,
                 Position,
-                new Rectangle(0, 0, 32, 32),
+                new Rectangle(PlayerNum == 0 ? 0 : 32, 0, 32, 31),
                 Color.White,
                 rotation,
-                new Vector2(16, 24),
+                new Vector2(16, 16),
                 1f,
                 SpriteEffects.None,
                 0
             );
+
 /*            spriteBatch.Draw(
                 _texture,
                 new Vector2(HitBox.X, HitBox.Y),
